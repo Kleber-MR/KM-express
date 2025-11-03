@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sabor Express • Rota Inteligente</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <header class="app-header">
+        <div class="container">
+            <h1 class="brand">🚚 Sabor Express</h1>
+            <p class="subtitle">Otimização de entregas com agrupamento inteligente e rota sugerida.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <h2 class="card-title">Envie seu CSV de entregas</h2>
+            <p class="muted">Formato esperado: arquivo `.csv` com colunas de coordenadas ou endereços.</p>
+
+            <form class="upload-form" action="/resultado" method="POST" enctype="multipart/form-data">
+                <label for="arquivo" class="dropzone" id="dropzone">
+                    <div class="dz-icon">📄</div>
+                    <div>
+                        <strong>Arraste e solte</strong> seu arquivo aqui<br />
+                        <span class="muted">ou clique para selecionar</span>
+                    </div>
+                </label>
+                <input id="arquivo" type="file" name="arquivo" accept=".csv" required style="display:none" />
+
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">Processar entregas</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="help">
+            <p class="muted">Dica: garanta que o CSV contenha as colunas necessárias para o agrupamento e a visualização.</p>
+        </section>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            <span class="muted">Feito com Flask • Modo debug ativo</span>
+        </div>
+    </footer>
+
+    <script>
+        // Comportamento de dropzone
+        const dz = document.getElementById('dropzone');
+        const input = document.getElementById('arquivo');
+
+        dz.addEventListener('click', () => input.click());
+        dz.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dz.classList.add('dragover');
+        });
+        dz.addEventListener('dragleave', () => dz.classList.remove('dragover'));
+        dz.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dz.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length) {
+                input.files = e.dataTransfer.files;
+            }
+        });
+
+        input.addEventListener('change', () => {
+            const name = input.files?.[0]?.name || '';
+            if (name) dz.querySelector('.dz-icon').textContent = '✅';
+        });
+    </script>
+</body>
+</html>

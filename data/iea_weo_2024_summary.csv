@@ -1,0 +1,4 @@
+metric,year,value,unit,source
+renewable_capacity_added,2023,560,GW,https://www.iberdrola.com/sustainability/energy-transition/iea-world-energy-outlook
+clean_energy_investment,2024,2,USD_trillion,https://www.iberdrola.com/sustainability/energy-transition/iea-world-energy-outlook
+annual_electricity_addition_forecast,2035,909,TWh,https://www.iberdrola.com/sustainability/energy-transition/iea-world-energy-outlook
