@@ -32,3 +32,6 @@ Thumbs.db
 # Data files (ajuste se quiser versionar exemplos)
 data/*.csv
 venv/
+ 
+# Ignore nested repo folder
+KM-express/
